@@ -11,20 +11,30 @@ const arr = [
     { productIng: "./images/7.webp" },
     { productIng: "./images/8.png" },
   ];
-const Products = () => {
+
+  // fetch data functhon on the server using fetch
+  async function getData() {
+    const res= await fetch("https://fakestoreapi.com/products")
+    if(!res.ok){
+      throw new Error('Field to fetch data')
+    }
+    return res.json()
+  }
+const Products = async () => {
+  const data =await getData();
+ 
     return (
         <section className="products flex">
-        {arr.map((item) => {
+        {data.map((item) => {
           return (
-            <article key={item.productIng} className="card">
+            <article title={item.title} key={item.productIng} className="card">
               <a href="/pages/product-details.html">
-                <img width={266} src={item.productIng} alt=""/>
+              {/* <img width={266} src={item.image} alt=""/>*/}
               </a>
               <div style={{ width: "266px" }} className="content">
-                <h1 className="title">Product Title</h1>
+                <h1 className="title">{item.title.slice(0,15)}...</h1>
                 <p className="description">
-                  Lorem ipsum dolor sit amet consectetur elit adipisicing . Ex
-                  tempore dolor in, accusantium laudantium accusamus.
+                  {item.description.slice(0,111)}...
                 </p>
                 <div
                   className="flex"
@@ -33,7 +43,7 @@ const Products = () => {
                     paddingBottom: "0.7rem",
                   }}
                 >
-                  <div className="price">$100</div>
+                  <div className="price">${item.price}</div>
                   <button className="add-to-cart flex">
                     <i className="fa-solid fa-cart-plus" />
                     Add To Cart
