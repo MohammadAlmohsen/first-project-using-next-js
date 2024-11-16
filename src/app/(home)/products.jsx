@@ -14,7 +14,8 @@ const arr = [
 
   // fetch data functhon on the server using fetch
   async function getData() {
-    const res= await fetch("https://fakestoreapi.com/products")
+    await new Promise(resolve => setTimeout(resolve, 3000)) // Wait before executing the next code 
+    const res= await fetch("http://localhost:3000/products")
     if(!res.ok){
       throw new Error('Field to fetch data')
     }
@@ -27,9 +28,9 @@ const Products = async () => {
         <section className="products flex">
         {data.map((item) => {
           return (
-            <article title={item.title} key={item.productIng} className="card">
+            <article title={item.title} key={item.id} className="card">
               <a href="/pages/product-details.html">
-              {/* <img width={266} src={item.image} alt=""/>*/}
+               <img width={266} src={item.productImg} alt=""/>
               </a>
               <div style={{ width: "266px" }} className="content">
                 <h1 className="title">{item.title.slice(0,15)}...</h1>

@@ -2,7 +2,8 @@ import Header from "../../../components/header.jsx";
 import Footer from "../../../components/footer.jsx";
 import "./Home.css";
 import Products from "./products.jsx";
-
+import { Suspense } from "react";
+import Loading from "./loading.jsx";
 
 export default function Home() {
   return (
@@ -26,7 +27,9 @@ export default function Home() {
           <i className="fa-solid fa-check" />
           Recommended for you
         </h1>
-      <Products/>
+        <Suspense fallback={<Loading />}>
+          <Products />
+        </Suspense>
       </main>
       <Footer />
     </>
