@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Link from 'next/link';
 
 const arr = [
     { productIng: "./images/1.png" },
@@ -14,24 +14,24 @@ const arr = [
 
   // fetch data functhon on the server using fetch
   async function getData() {
-    await new Promise(resolve => setTimeout(resolve, 3000)) // Wait before executing the next code 
-    const res= await fetch("http://localhost:3000/products")
+   // await new Promise(resolve => setTimeout(resolve, 3000)) // Wait before executing the next code 
+    const res= await fetch("http://localhost:4000/products")
     if(!res.ok){
       throw new Error('Field to fetch data')
     }
     return res.json()
   }
 const Products = async () => {
-  const data =await getData();
+  const arrData =await getData();
  
     return (
         <section className="products flex">
-        {data.map((item) => {
+        {arrData.map((item) => {
           return (
             <article title={item.title} key={item.id} className="card">
-              <a href="/pages/product-details.html">
+              <Link href={`/product-details/${item.id}`}>
                <img width={266} src={item.productImg} alt=""/>
-              </a>
+              </Link>
               <div style={{ width: "266px" }} className="content">
                 <h1 className="title">{item.title.slice(0,15)}...</h1>
                 <p className="description">
