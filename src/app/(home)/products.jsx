@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
 const arr = [
     { productIng: "./images/1.png" },
@@ -47,7 +49,8 @@ const Products = async () => {
                 >
                   <div className="price">${item.price}</div>
                   <button className="add-to-cart flex">
-                    <i className="fa-solid fa-cart-plus" />
+                   
+                    <FontAwesomeIcon style={{width:"1.1rem"}} icon={faCartPlus}/>
                     Add To Cart
                   </button>
                 </div>
