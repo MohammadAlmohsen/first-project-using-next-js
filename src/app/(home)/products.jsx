@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 const arr = [
     { productIng: "./images/1.png" },
@@ -17,7 +18,7 @@ const arr = [
    // await new Promise(resolve => setTimeout(resolve, 3000)) // Wait before executing the next code 
     const res= await fetch("http://localhost:4000/products")
     if(!res.ok){
-      throw new Error('Field to fetch data')
+      notFound()
     }
     return res.json()
   }

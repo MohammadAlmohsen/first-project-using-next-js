@@ -4,11 +4,12 @@ import Footer from "../../../../components/footer";
 import "./product-details.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import { notFound } from "next/navigation";
 async function getData(iddd) {
   // await new Promise(resolve => setTimeout(resolve, 3000)) // Wait before executing the next code
   const res = await fetch(`http://localhost:4000/products/${iddd}`);
   if (!res.ok) {
-    throw new Error("Field to fetch data");
+    notFound();
   }
   return res.json();
 }
